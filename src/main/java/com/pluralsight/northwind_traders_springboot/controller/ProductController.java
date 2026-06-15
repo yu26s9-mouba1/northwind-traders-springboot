@@ -26,19 +26,31 @@ public class ProductController {
     }
     //Get product By ID
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable int id) {
+    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
         return productService.getProductById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+//    @GetMapping("/category/{category}")
+//    public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable String category) {
+//        return ResponseEntity.ok(productService.getProductsByCategory(category));
+//    }
+//
+    @GetMapping("/name/{name}")
+    public ResponseEntity<List<Product>> getProductsByName(@PathVariable String name){
+        return ResponseEntity.ok(productService.getProductByName(name));
+    }
+
     //Create a new product
     @PostMapping
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         return ResponseEntity.ok(productService.createProduct(product));
     }
+
     //Delete product
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProductById(@PathVariable int id) {
+    public ResponseEntity<Void> deleteProductById(@PathVariable Long id) {
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
 

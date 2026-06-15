@@ -20,11 +20,28 @@ public class ProductService {
 
     //Get all products
     public List<Product> getAllProducts() {
-        return productRepository.findAll();
+        List<Product> results = productRepository.findAll();
+        for(Product product : results) {
+            System.out.println(product.getName());
+        }
+        return results;
+    }
+//
+//    //Get product by category
+//   public List<Product> getProductsByCategory(String category) {
+//        return productRepository.findByCategory(category);
+//   }
+//
+//
+    //Get product by name
+    public List<Product> getProductByName(String name) {
+        return productRepository.findByName(name);
     }
 
+
+
     //Get products by ID
-    public Optional <Product> getProductById(int id) {
+    public Optional <Product> getProductById(Long id) {
         return productRepository.findById(id);
     }
 
@@ -34,7 +51,7 @@ public class ProductService {
     }
 
     //Delete a product by ID
-    public void deleteProduct(int id) {
+    public void deleteProduct(Long id) {
         productRepository.deleteById(id);
 
     }
